@@ -1,4 +1,7 @@
 plot1 <-function(file){
+        #This function plot1 takes "household_power_consumption.txt" as data 
+        #input and creates a png file with a histogram plot of Global Active Power
+        
         #file argument should be the path of the data file
         data<-read.table(file,
                         sep=";",header=TRUE,na.string=c("NA","?"))
@@ -6,7 +9,7 @@ plot1 <-function(file){
         #formatting the character 'Date' to a Date column and storing separately
         data$Dateformatted<-as.Date(data$Date,"%d/%m/%Y")
         
-        #formatting the couple of dates that we are pulling the data for to date
+        #formatting the couple of dates that we are pulling the data for to a date
         dates<-c(as.Date('2007-02-01',"%Y-%m-%d"),as.Date('2007-02-02',"%Y-%m-%d"))
         
         #subsetting the data by the couple of dates we are interested in
