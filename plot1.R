@@ -15,6 +15,9 @@ plot1 <-function(file){
         #subsetting the data by the couple of dates we are interested in
         data1<-subset(data, Dateformatted %in% dates)
         
+        #changing the values to numeric
+        data1$Global_active_power = as.numeric(as.character(data1$Global_active_power))
+        
         #setting the graph margins so that labels are visible
         par(mar=c(6,5,2,2))
         
