@@ -1,7 +1,5 @@
 plot4 <-function(file){
-        #This function plot3 takes "household_power_consumption.txt" as data 
-        #input and creates a png file with a line plot of date/time of
-        #couple of dates that we are interested in vs energy sub metering 1,2,3
+        #This function plot4 produces 4 different graphs on single png file
         
         #file argument should be the path of the data file
         data<-read.table(file,
