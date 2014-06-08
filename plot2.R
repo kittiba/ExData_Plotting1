@@ -16,10 +16,6 @@ plot2 <-function(file){
         #subsetting the data by the couple of dates we are interested in
         data1<-subset(data, Dateformatted %in% dates)
         
-        #Setting the system locale
-        lct <- Sys.getlocale("LC_TIME")
-        Sys.setlocale("LC_TIME", lct)
-        
         #formatting the date 'Dateformatted' to a Date and time column
         data1$Dateformatted<-strptime(paste(data1$Date,data1$Time),"%d/%m/%Y %H:%M:%S")
         

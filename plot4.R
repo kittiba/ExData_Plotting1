@@ -1,4 +1,4 @@
-plot3 <-function(file){
+plot4 <-function(file){
         #This function plot3 takes "household_power_consumption.txt" as data 
         #input and creates a png file with a line plot of date/time of
         #couple of dates that we are interested in vs energy sub metering 1,2,3
@@ -19,6 +19,12 @@ plot3 <-function(file){
         #formatting the date 'Dateformatted' to a Date and time column
         data1$Dateformatted<-strptime(paste(data1$Date,data1$Time),"%d/%m/%Y %H:%M:%S")
         
+        #changing the Global active power values to numeric
+        data1$Global_active_power = as.numeric(as.character(data1$Global_active_power))
+        
+        #changing the Voltage values to numeric
+        data1$Voltage = as.numeric(as.character(data1$Voltage))
+        
         #changing the sub metering 1 values to numeric
         data1$Sub_metering_1 = as.numeric(as.character(data1$Sub_metering_1))
         
@@ -28,12 +34,32 @@ plot3 <-function(file){
         #changing the sub metering 3 values to numeric
         data1$Sub_metering_3 = as.numeric(as.character(data1$Sub_metering_3))
         
+        #changing the Global Reactive power values to numeric
+        data1$Global_reactive_power = as.numeric(as.character(data1$Global_reactive_power))
+        
         
         #setting the graph margins so that labels are visible
         par(mar=c(6,6,2,2))
         
         #Creating a new PNG file with the right dimensions
-        png(file="plot3.png",width = 480, height = 480, units = "px")
+        png(file="plot4.png",width = 480, height = 480, units = "px")
+        
+        #setting to draw 4 graphs
+        par(mfrow=c(2,2))
+        
+        #Plotting a line plot to the screen
+        with(data1, plot(data1$Dateformatted, data1$Global_active_power, 
+                         type="l",
+                         xlab="",
+                         ylab="Global Active power",
+                         col="black"))
+
+        #Plotting a voltage vs data/time plot to the screen
+        with(data1, plot(data1$Dateformatted, data1$Voltage, 
+                         type="l",
+                         xlab="datetime",
+                         ylab="voltage",
+                         col="black"))
         
         #Plotting with no lines initially
         plot(data1$Dateformatted, data1$Sub_metering_1,
@@ -45,10 +71,17 @@ plot3 <-function(file){
         lines(data1$Dateformatted, data1$Sub_metering_3,  type="l",col="blue")
         
         #Defining the legend
-        legend("topright", legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), 
-               col=c("black","red","blue"),lwd=1, cex=1)
+        legend("topright", c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), 
+               col=c("black","red","blue"),lwd=1, cex=1,bty="n")
         
-        #closing the file
+        #Plotting a voltage vs data/time plot to the screen
+        with(data1, plot(data1$Dateformatted, data1$Global_reactive_power, 
+                         type="l",
+                         xlab="datetime",
+                         ylab="Global_reactive_power",
+                         col="black"))
+        
+        #closing the file 
         dev.off()
        
 
